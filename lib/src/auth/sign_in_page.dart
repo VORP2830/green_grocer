@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:green_grocer/src/auth/components/custom_button.dart';
 import 'package:green_grocer/src/auth/components/custom_text_field.dart';
 import 'package:green_grocer/src/auth/sign_up_page.dart';
+import 'package:green_grocer/src/base/base_page.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
 
 class SignInPage extends StatelessWidget {
@@ -98,9 +99,17 @@ class SignInPage extends StatelessWidget {
                     //Botão entrar
                     SizedBox(
                       height: 50,
-                      child: CustomButton (
+                      child: CustomButton(
                         label: 'Entrar',
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) {
+                                return const BasePage();
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ),
                     //Esqueceu senha
