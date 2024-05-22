@@ -1,6 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:green_grocer/src/auth/components/custom_button.dart';
 import 'package:green_grocer/src/auth/components/custom_text_field.dart';
+import 'package:green_grocer/src/auth/sign_up_page.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
 
 class SignInPage extends StatelessWidget {
@@ -96,19 +98,9 @@ class SignInPage extends StatelessWidget {
                     //Botão entrar
                     SizedBox(
                       height: 50,
-                      child: ElevatedButton(
+                      child: CustomButton (
+                        label: 'Entrar',
                         onPressed: () {},
-                        child: const Text(
-                          'Entrar',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
                       ),
                     ),
                     //Esqueceu senha
@@ -160,7 +152,15 @@ class SignInPage extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) {
+                                return SignUpPage();
+                              },
+                            ),
+                          );
+                        },
                         child: const Text(
                           'Criar conta',
                           style: TextStyle(fontSize: 18),
