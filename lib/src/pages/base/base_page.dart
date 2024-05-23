@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_grocer/src/pages/home/home_tab.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -19,12 +20,7 @@ class _BasePageState extends State<BasePage> {
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: [
-          Container(
-            color: Colors.red,
-            child: Center(
-              child: Text('Home'),
-            ),
-          ),
+          const HomeTab(),
           Container(
             color: Colors.blue,
             child: Center(
