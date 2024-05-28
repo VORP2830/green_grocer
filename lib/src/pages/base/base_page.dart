@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_grocer/src/pages/cart/cart_tab.dart';
 import 'package:green_grocer/src/pages/home/home_tab.dart';
+import 'package:green_grocer/src/pages/profile/profile_tab.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -22,19 +23,14 @@ class _BasePageState extends State<BasePage> {
         controller: pageController,
         children: [
           const HomeTab(),
-          CartTab(),
+          const CartTab(),
           Container(
             color: Colors.yellow,
             child: Center(
               child: Text('Pedidos'),
             ),
           ),
-          Container(
-            color: Colors.green,
-            child: Center(
-              child: Text('Perfil'),
-            ),
-          ),
+          ProfileTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
