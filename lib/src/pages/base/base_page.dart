@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_grocer/src/pages/cart/cart_tab.dart';
 import 'package:green_grocer/src/pages/home/home_tab.dart';
 
 class BasePage extends StatefulWidget {
@@ -21,12 +22,7 @@ class _BasePageState extends State<BasePage> {
         controller: pageController,
         children: [
           const HomeTab(),
-          Container(
-            color: Colors.blue,
-            child: Center(
-              child: Text('Carrinho'),
-            ),
-          ),
+          CartTab(),
           Container(
             color: Colors.yellow,
             child: Center(
