@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_grocer/src/pages/cart/cart_tab.dart';
 import 'package:green_grocer/src/pages/home/home_tab.dart';
+import 'package:green_grocer/src/pages/orders/orders_tab.dart';
 import 'package:green_grocer/src/pages/profile/profile_tab.dart';
 
 class BasePage extends StatefulWidget {
@@ -21,15 +22,10 @@ class _BasePageState extends State<BasePage> {
         //Impede o scroll da tela
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: [
-          const HomeTab(),
-          const CartTab(),
-          Container(
-            color: Colors.yellow,
-            child: Center(
-              child: Text('Pedidos'),
-            ),
-          ),
+        children: const [
+          HomeTab(),
+          CartTab(),
+          OrdersTab(),
           ProfileTab(),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:green_grocer/src/pages/cart/components/cart_tile.dart';
 import 'package:green_grocer/src/services/utils_services.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';
 import 'package:green_grocer/src/config/app_data.dart' as app_data;
+import 'package:green_grocer/src/widgets/payment_dialog.dart';
 
 class CartTab extends StatefulWidget {
   const CartTab({super.key});
@@ -36,7 +37,12 @@ class _CartTabState extends State<CartTab> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         centerTitle: true,
-        title: const Text('Carrinho'),
+        title: const Text(
+          'Carrinho',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -91,7 +97,16 @@ class _CartTabState extends State<CartTab> {
                     label: 'Concluir pedido',
                     onPressed: () async {
                       bool? result = await showOrderConfirmation();
-                      print(result);
+                      if (result ?? false) {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return PaymentDialog(
+                              order: app_data.orders.first,
+                            );
+                          },
+                        );
+                      }
                     },
                     color: CustomColors.customSwatchColor,
                   ),
