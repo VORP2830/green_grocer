@@ -5,7 +5,7 @@ import 'package:green_grocer/src/services/utils_services.dart';
 import 'package:green_grocer/src/widgets/quantity_widget.dart';
 
 class ProductPage extends StatefulWidget {
-  ProductPage({super.key, required this.item});
+  const ProductPage({super.key, required this.item});
   final ItemModel item;
 
   @override
@@ -28,8 +28,8 @@ class _ProductPageState extends State<ProductPage> {
             children: [
               Expanded(
                 child: Hero(
-                    child: Image.asset(widget.item.imageUrl),
-                    tag: widget.item.imageUrl),
+                    tag: widget.item.imageUrl,
+                    child: Image.asset(widget.item.imageUrl)),
               ),
               Expanded(
                 child: Container(

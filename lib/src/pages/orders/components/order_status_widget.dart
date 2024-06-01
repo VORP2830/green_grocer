@@ -39,7 +39,7 @@ class OrderStatusWidget extends StatelessWidget {
             title: 'Pix estornado',
             backgroundColor: Colors.orange,
           ),
-          CustomDividerWidget()
+          const CustomDividerWidget()
         ] else if (isOverdue) ...[
           const StatusDot(
             isActive: true,

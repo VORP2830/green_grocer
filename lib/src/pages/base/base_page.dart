@@ -38,7 +38,12 @@ class _BasePageState extends State<BasePage> {
         onTap: (int index) {
           setState(() {
             currentIndex = index;
-            pageController.jumpToPage(index);
+            //pageController.jumpToPage(index);
+            pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 700),
+              curve: Curves.ease,
+            );
           });
         },
         items: const <BottomNavigationBarItem>[

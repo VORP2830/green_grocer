@@ -103,7 +103,7 @@ class _ProfileTabState extends State<ProfileTab> {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
