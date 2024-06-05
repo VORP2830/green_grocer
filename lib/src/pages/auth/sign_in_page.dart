@@ -1,14 +1,20 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:green_grocer/src/page_routes/app_pages.dart';
+import 'package:green_grocer/src/pages/auth/controller/auth_controller.dart';
 import 'package:green_grocer/src/widgets/app_name_widget.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';
 import 'package:green_grocer/src/widgets/custom_text_field.dart';
-import 'package:green_grocer/src/pages/auth/sign_up_page.dart';
-import 'package:green_grocer/src/pages/base/base_page.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  SignInPage({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,101 +76,124 @@ class SignInPage extends StatelessWidget {
                     topRight: Radius.circular(32),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    //Email
-                    const CustomTextField(
-                      label: 'Email',
-                      icon: Icons.email,
-                    ),
-                    //Senha
-                    const CustomTextField(
-                      label: 'Senha',
-                      icon: Icons.lock,
-                      isSecret: true,
-                    ),
-                    //Botão entrar
-                    SizedBox(
-                      height: 50,
-                      child: CustomButton(
-                        label: 'Entrar',
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (_) {
-                                return const BasePage();
-                              },
-                            ),
-                          );
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      //Email
+                      CustomTextField(
+                        label: 'Email',
+                        icon: Icons.email,
+                        controller: _emailController,
+                        validator: (email) {
+                          if (email == null || email.isEmpty) {
+                            return 'Digite seu email!';
+                          }
+                          if (!email.isEmail) return 'Digite um email válido!';
+                          return null;
                         },
                       ),
-                    ),
-                    //Esqueceu senha
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Esqueceu a senha?',
-                          style: TextStyle(
-                              color: CustomColors.customContrastColor),
-                        ),
-                      ),
-                    ),
-                    //Divisor
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey[400],
-                              thickness: 2,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('Ou'),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey[400],
-                              thickness: 2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Botão criar conta
-                    SizedBox(
-                      height: 50,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          side: BorderSide(
-                            width: 2,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) {
-                                return SignUpPage();
-                              },
-                            ),
-                          );
+                      //Senha
+                      CustomTextField(
+                        label: 'Senha',
+                        icon: Icons.lock,
+                        controller: _passwordController,
+                        isSecret: true,
+                        validator: (password) {
+                          if (password == null || password.isEmpty) {
+                            return 'Digite sua senha!';
+                          }
+                          if (password.length < 7) {
+                            return 'Digite uma senha com pelo menos 7 caracteres!';
+                          }
+                          return null;
                         },
-                        child: const Text(
-                          'Criar conta',
-                          style: TextStyle(fontSize: 18),
+                      ),
+                      //Botão entrar
+                      SizedBox(
+                        height: 50,
+                        child: GetX<AuthController>(
+                          builder: (authController) {
+                            return CustomButton(
+                              isLoading: authController.isLoading.value,
+                              label: 'Entrar',
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                if (_formKey.currentState!.validate()) {
+                                  authController.signIn(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
+                                } else {
+                                  print('TUdo noa validado');
+                                }
+                                //Get.offNamed(PagesRoutes.baseRoute);
+                              },
+                            );
+                          },
                         ),
                       ),
-                    ),
-                  ],
+                      //Esqueceu senha
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Esqueceu a senha?',
+                            style: TextStyle(
+                                color: CustomColors.customContrastColor),
+                          ),
+                        ),
+                      ),
+                      //Divisor
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                color: Colors.grey[400],
+                                thickness: 2,
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Text('Ou'),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                color: Colors.grey[400],
+                                thickness: 2,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      //Botão criar conta
+                      SizedBox(
+                        height: 50,
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            side: BorderSide(
+                              width: 2,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          onPressed: () {
+                            Get.toNamed(PagesRoutes.signUpRoute);
+                          },
+                          child: const Text(
+                            'Criar conta',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

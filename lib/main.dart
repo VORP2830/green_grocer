@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:green_grocer/src/pages/splash/splash_page.dart';
+import 'package:get/get.dart';
+import 'package:green_grocer/src/page_routes/app_pages.dart';
+import 'package:green_grocer/src/pages/auth/controller/auth_controller.dart';
 
 void main() {
+  //Injeção de dependência
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 
@@ -10,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Greengrocer',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white.withAlpha(190),
@@ -25,7 +29,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashPage(),
+      initialRoute: PagesRoutes.splashRoute,
+      getPages: AppPages.pages,
     );
   }
 }
