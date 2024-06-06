@@ -15,3 +15,4 @@ O Green Grocer é um aplicativo desenvolvido com Flutter e GetX para gerenciamen
 - **add_to_cart_animation**: Animação para adicionar itens ao carrinho de compras.
 - **fluttertoast**: Exibição de mensagens toast para notificações rápidas.
 - **shimmer**: Efeitos shimmer para exibir carregamento de conteúdo de forma visualmente atraente.
+- **getx**: Gerenciamento de estado reativo, rotas e dependências.

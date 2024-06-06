@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_grocer/src/page_routes/app_pages.dart';
-import 'package:green_grocer/src/pages/auth/controller/auth_controller.dart';
+import 'package:green_grocer/src/pages/auth/controllers/auth_controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   //Injeção de dependência
   Get.put(AuthController());
   runApp(const MyApp());

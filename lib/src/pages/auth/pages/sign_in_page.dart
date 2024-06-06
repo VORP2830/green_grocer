@@ -2,7 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_grocer/src/page_routes/app_pages.dart';
-import 'package:green_grocer/src/pages/auth/controller/auth_controller.dart';
+import 'package:green_grocer/src/pages/auth/controllers/auth_controller.dart';
 import 'package:green_grocer/src/widgets/app_name_widget.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';
 import 'package:green_grocer/src/widgets/custom_text_field.dart';
@@ -125,10 +125,7 @@ class SignInPage extends StatelessWidget {
                                     email: _emailController.text,
                                     password: _passwordController.text,
                                   );
-                                } else {
-                                  print('TUdo noa validado');
                                 }
-                                //Get.offNamed(PagesRoutes.baseRoute);
                               },
                             );
                           },

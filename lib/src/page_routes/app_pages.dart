@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:green_grocer/src/pages/auth/sign_in_page.dart';
-import 'package:green_grocer/src/pages/auth/sign_up_page.dart';
+import 'package:green_grocer/src/pages/auth/pages/sign_in_page.dart';
+import 'package:green_grocer/src/pages/auth/pages/sign_up_page.dart';
 import 'package:green_grocer/src/pages/base/base_page.dart';
 import 'package:green_grocer/src/pages/splash/splash_page.dart';
 

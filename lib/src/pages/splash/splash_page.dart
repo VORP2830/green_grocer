@@ -1,27 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
-import 'package:green_grocer/src/page_routes/app_pages.dart';
 import 'package:green_grocer/src/widgets/app_name_widget.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
-
-  @override
-  State<SplashPage> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        Get.offNamed(PagesRoutes.signInRoute);
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
