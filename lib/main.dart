@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Greengrocer',
       theme: ThemeData(
+        dialogBackgroundColor: Colors.white,
         scaffoldBackgroundColor: Colors.white.withAlpha(190),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

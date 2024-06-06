@@ -8,7 +8,8 @@ import 'package:intl/intl.dart';
 class UtilsServices {
   final storage = const FlutterSecureStorage();
 
-  Future<void> saveLocalData({required String key, required String data}) async {
+  Future<void> saveLocalData(
+      {required String key, required String data}) async {
     await storage.write(key: key, value: data);
   }
 
@@ -34,7 +35,7 @@ class UtilsServices {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 3,
-      backgroundColor: isError ? Colors.red : Colors.white,
+      backgroundColor: isError ? Colors.red : Colors.green,
       textColor: isError ? Colors.white : Colors.black,
       fontSize: 14,
     );

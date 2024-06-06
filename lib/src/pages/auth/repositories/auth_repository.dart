@@ -49,4 +49,14 @@ class AuthRepository {
     );
     return handleUserOrError(result);
   }
+
+  Future<void> forgotPassword(String email) async {
+    _httpManager.restRequest(
+      url: Endpoint.forgotPassword,
+      method: HttpMethods.post,
+      body: {
+        'email': email,
+      },
+    );
+  }
 }

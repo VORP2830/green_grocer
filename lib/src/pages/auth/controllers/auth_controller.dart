@@ -64,4 +64,16 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  Future<void> forgotPassword(String email) async {
+    try {
+      _authRepository.forgotPassword(email);
+      _utilsServices.showToast(
+        message: 'Email enviado com sucesso!',
+        isError: false,
+      );
+    } catch (e) {
+      _utilsServices.showToast(message: e.toString(), isError: true);
+    }
+  }
 }
