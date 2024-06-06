@@ -45,7 +45,18 @@ class AuthController extends GetxController {
     try {
       isLoading.value = true;
       user = await _authRepository.signIn(email: email, password: password);
+      saveTokenAndProceedToBase();
+    } catch (e) {
+      _utilsServices.showToast(message: e.toString(), isError: true);
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
+  Future<void> signUp() async {
+    try {
+      isLoading.value = true;
+      user = await _authRepository.signUp(user);
       saveTokenAndProceedToBase();
     } catch (e) {
       _utilsServices.showToast(message: e.toString(), isError: true);

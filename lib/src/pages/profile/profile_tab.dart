@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:green_grocer/src/pages/auth/controllers/auth_controller.dart';
 import 'package:green_grocer/src/widgets/custom_text_field.dart';
 import 'package:green_grocer/src/config/app_data.dart' as app_data;
 
@@ -10,6 +12,8 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  final _authController = Get.find<AuthController>();
+
   final user = app_data.user;
 
   @override
@@ -30,7 +34,9 @@ class _ProfileTabState extends State<ProfileTab> {
               Icons.logout,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              _authController.signOut();
+            },
           )
         ],
       ),

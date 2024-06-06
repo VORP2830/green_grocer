@@ -7,6 +7,14 @@ import 'package:green_grocer/src/services/http_manager.dart';
 class AuthRepository {
   final HttpManager _httpManager = HttpManager();
 
+  UserModel handleUserOrError(Map<dynamic, dynamic> result) {
+    if (result['result'] != null) {
+      return UserModel.fromJson(result['result']);
+    } else {
+      throw auth_errors.authErrorsString(result['error']);
+    }
+  }
+
   Future<UserModel> validateToken(String token) async {
     final result = await _httpManager.restRequest(
       url: Endpoint.validateToken,
@@ -15,15 +23,13 @@ class AuthRepository {
         'x-parse-session-token': token,
       },
     );
-    if (result['result'] != null) {
-      return UserModel.fromJson(result['result']);
-    } else {
-      throw auth_errors.authErrorsString(result['error']);
-    }
+    return handleUserOrError(result);
   }
 
-  Future<UserModel> signIn(
-      {required String email, required String password}) async {
+  Future<UserModel> signIn({
+    required String email,
+    required String password,
+  }) async {
     final result = await _httpManager.restRequest(
       url: Endpoint.signin,
       method: HttpMethods.post,
@@ -32,10 +38,15 @@ class AuthRepository {
         'password': password,
       },
     );
-    if (result['result'] != null) {
-      return UserModel.fromJson(result['result']);
-    } else {
-      throw auth_errors.authErrorsString(result['error']);
-    }
+    return handleUserOrError(result);
+  }
+
+  Future<UserModel> signUp(UserModel user) async {
+    final result = await _httpManager.restRequest(
+      url: Endpoint.signup,
+      method: HttpMethods.post,
+      body: user.toJson(),
+    );
+    return handleUserOrError(result);
   }
 }

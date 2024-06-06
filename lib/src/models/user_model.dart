@@ -1,11 +1,11 @@
 class UserModel {
-  final String? id;
-  final String? name;
-  final String? email;
-  final String? phone;
-  final String? cpf;
-  final String? password;
-  final String? token;
+  String? id;
+  String? name;
+  String? email;
+  String? phone;
+  String? cpf;
+  String? password;
+  String? token;
 
   UserModel({
     this.id,

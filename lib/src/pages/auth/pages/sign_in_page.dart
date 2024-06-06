@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_grocer/src/page_routes/app_pages.dart';
 import 'package:green_grocer/src/pages/auth/controllers/auth_controller.dart';
+import 'package:green_grocer/src/services/validator.dart';
 import 'package:green_grocer/src/widgets/app_name_widget.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';
 import 'package:green_grocer/src/widgets/custom_text_field.dart';
@@ -86,13 +87,7 @@ class SignInPage extends StatelessWidget {
                         label: 'Email',
                         icon: Icons.email,
                         controller: _emailController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return 'Digite seu email!';
-                          }
-                          if (!email.isEmail) return 'Digite um email válido!';
-                          return null;
-                        },
+                        validator: emailValidator,
                       ),
                       //Senha
                       CustomTextField(
@@ -100,15 +95,7 @@ class SignInPage extends StatelessWidget {
                         icon: Icons.lock,
                         controller: _passwordController,
                         isSecret: true,
-                        validator: (password) {
-                          if (password == null || password.isEmpty) {
-                            return 'Digite sua senha!';
-                          }
-                          if (password.length < 7) {
-                            return 'Digite uma senha com pelo menos 7 caracteres!';
-                          }
-                          return null;
-                        },
+                        validator: passwordValidator,
                       ),
                       //Botão entrar
                       SizedBox(
