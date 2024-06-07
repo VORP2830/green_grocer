@@ -1,4 +1,5 @@
 class ItemModel {
+  String? id;
   String name;
   String imageUrl;
   String unit;
@@ -6,6 +7,7 @@ class ItemModel {
   String description;
 
   ItemModel({
+    this.id,
     required this.name,
     required this.imageUrl,
     required this.unit,
@@ -15,8 +17,9 @@ class ItemModel {
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
     return ItemModel(
-      name: json['name'],
-      imageUrl: json['imageUrl'],
+      id: json['id'],
+      name: json['title'],
+      imageUrl: json['picture'],
       unit: json['unit'],
       price: json['price'].toDouble(),
       description: json['description'],
@@ -25,11 +28,16 @@ class ItemModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'imageUrl': imageUrl,
+      'id': id,
+      'title': name,
+      'picture': imageUrl,
       'unit': unit,
       'price': price,
       'description': description,
     };
   }
+
+  @override
+  String toString() =>
+      'ItemModel(id: $id, title: $name, picture: $imageUrl, unit: $unit, price: $price, description: $description)';
 }

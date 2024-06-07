@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
 import 'package:green_grocer/src/models/item_model.dart';
+import 'package:green_grocer/src/pages/base/controllers/navigation_controller.dart';
 import 'package:green_grocer/src/services/utils_services.dart';
 import 'package:green_grocer/src/widgets/quantity_widget.dart';
 
@@ -17,6 +19,8 @@ class _ProductPageState extends State<ProductPage> {
 
   int cartItemQuantity = 1;
 
+  final _navigationController = Get.find<NavigationController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +33,7 @@ class _ProductPageState extends State<ProductPage> {
               Expanded(
                 child: Hero(
                     tag: widget.item.imageUrl,
-                    child: Image.asset(widget.item.imageUrl)),
+                    child: Image.network(widget.item.imageUrl)),
               ),
               Expanded(
                 child: Container(
@@ -101,7 +105,11 @@ class _ProductPageState extends State<ProductPage> {
                       SizedBox(
                         height: 55,
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+                            _navigationController
+                                .navigatePageView(NavigationTabs.cart);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,

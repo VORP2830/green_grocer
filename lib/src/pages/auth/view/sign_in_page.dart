@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_grocer/src/page_routes/app_pages.dart';
 import 'package:green_grocer/src/pages/auth/controllers/auth_controller.dart';
-import 'package:green_grocer/src/pages/auth/pages/components/forgot_password_dialog.dart';
+import 'package:green_grocer/src/pages/auth/view/components/forgot_password_dialog.dart';
 import 'package:green_grocer/src/services/validator.dart';
 import 'package:green_grocer/src/widgets/app_name_widget.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';

@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
-import 'package:green_grocer/src/pages/auth/pages/sign_in_page.dart';
-import 'package:green_grocer/src/pages/auth/pages/sign_up_page.dart';
-import 'package:green_grocer/src/pages/base/base_page.dart';
+import 'package:green_grocer/src/pages/auth/view/sign_in_page.dart';
+import 'package:green_grocer/src/pages/auth/view/sign_up_page.dart';
+import 'package:green_grocer/src/pages/base/binding/navigation_biding.dart';
+import 'package:green_grocer/src/pages/base/views/base_page.dart';
+import 'package:green_grocer/src/pages/home/binding/home_binding.dart';
 import 'package:green_grocer/src/pages/splash/splash_page.dart';
 
 abstract class AppPages {
@@ -9,7 +11,6 @@ abstract class AppPages {
     GetPage(
       page: () => const SplashPage(),
       name: PagesRoutes.splashRoute,
-
     ),
     GetPage(
       page: () => SignInPage(),
@@ -22,6 +23,10 @@ abstract class AppPages {
     GetPage(
       page: () => const BasePage(),
       name: PagesRoutes.baseRoute,
+      bindings: [
+        HomeBinding(),
+        NavigationBiding(),
+      ],
     ),
   ];
 }
