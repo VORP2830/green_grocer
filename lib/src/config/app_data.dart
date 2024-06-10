@@ -78,9 +78,9 @@ List<String> categories = [
 ];
 
 List<CartItemModel> cartItems = [
-  CartItemModel(item: apple, quantity: 2),
-  CartItemModel(item: mango, quantity: 1),
-  CartItemModel(item: guava, quantity: 3),
+  CartItemModel(id: '1',item: apple, quantity: 2),
+  CartItemModel(id: '2',item: mango, quantity: 1),
+  CartItemModel(id: '3',item: guava, quantity: 3),
 ];
 
 UserModel user = UserModel(
@@ -92,36 +92,5 @@ UserModel user = UserModel(
 );
 
 List<OrderModel> orders = [
-  OrderModel(
-    id: '146454453',
-    createdDateTime: DateTime.now(),
-    overdueDateTime: DateTime.now().add(const Duration(minutes: 5)),
-    items: [
-      CartItemModel(
-        item: mango,
-        quantity: 5,
-      ),
-      CartItemModel(
-        item: apple,
-        quantity: 2,
-      )
-    ],
-    status: 'pending_payment',
-    copyAndPast: 'copy1',
-    total: 12.50,
-  ),
-  OrderModel(
-    id: '234642342',
-    createdDateTime: DateTime.now(),
-    overdueDateTime: DateTime.now().subtract(const Duration(minutes: 5)),
-    items: [
-      CartItemModel(
-        item: apple,
-        quantity: 2,
-      )
-    ],
-    status: 'delivered',
-    copyAndPast: 'copy2',
-    total: 11,
-  ),
+  
 ];

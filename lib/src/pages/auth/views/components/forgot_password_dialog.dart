@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:green_grocer/src/pages/auth/controllers/auth_controller.dart';
 import 'package:green_grocer/src/services/validator.dart';
 import 'package:green_grocer/src/widgets/custom_text_field.dart';

@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
 import 'package:green_grocer/src/models/item_model.dart';
 import 'package:green_grocer/src/pages/base/controllers/navigation_controller.dart';
+import 'package:green_grocer/src/pages/cart/controllers/cart_controller.dart';
 import 'package:green_grocer/src/services/utils_services.dart';
 import 'package:green_grocer/src/widgets/quantity_widget.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key, required this.item});
-  final ItemModel item;
+  ProductPage({super.key});
+  final ItemModel item = Get.arguments;
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -20,6 +21,7 @@ class _ProductPageState extends State<ProductPage> {
   int cartItemQuantity = 1;
 
   final _navigationController = Get.find<NavigationController>();
+  final _cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +109,10 @@ class _ProductPageState extends State<ProductPage> {
                         child: ElevatedButton.icon(
                           onPressed: () {
                             Get.back();
+                            _cartController.addItemToCart(
+                              item: widget.item,
+                              quantity: cartItemQuantity,
+                            );
                             _navigationController
                                 .navigatePageView(NavigationTabs.cart);
                           },

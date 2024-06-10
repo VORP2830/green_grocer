@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
-import 'package:green_grocer/src/models/cart_item_model.dart';
-import 'package:green_grocer/src/pages/cart/components/cart_tile.dart';
+import 'package:green_grocer/src/pages/cart/controllers/cart_controller.dart';
+import 'package:green_grocer/src/pages/cart/views/components/cart_tile.dart';
 import 'package:green_grocer/src/services/utils_services.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';
 import 'package:green_grocer/src/config/app_data.dart' as app_data;
@@ -16,22 +17,7 @@ class CartTab extends StatefulWidget {
 
 class _CartTabState extends State<CartTab> {
   final UtilsServices utilsServices = UtilsServices();
-
-  void removeItem(CartItemModel cartItem) {
-    setState(() {
-      app_data.cartItems.remove(cartItem);
-      utilsServices.showToast(
-          message: '${cartItem.item.name} removido do carrinho');
-    });
-  }
-
-  double getTotalPrice() {
-    double total = 0;
-    for (var item in app_data.cartItems) {
-      total += item.totalPrice();
-    }
-    return total;
-  }
+  final _cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +35,29 @@ class _CartTabState extends State<CartTab> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: app_data.cartItems.length,
-              itemBuilder: (_, index) {
-                return CartTile(
-                  cartItem: app_data.cartItems[index],
-                  remove: removeItem,
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                if (controller.cartItems.isEmpty) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.remove_shopping_cart,
+                        size: 40,
+                        color: CustomColors.customSwatchColor,
+                      ),
+                      const Text('Não há itens no carrinho!')
+                    ],
+                  );
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: controller.cartItems.length,
+                  itemBuilder: (_, index) {
+                    return CartTile(
+                      cartItem: controller.cartItems[index],
+                    );
+                  },
                 );
               },
             ),
@@ -85,37 +87,38 @@ class _CartTabState extends State<CartTab> {
                   'Total geral',
                   style: TextStyle(fontSize: 12),
                 ),
-                Text(
-                  utilsServices.priceToCurrency(getTotalPrice()),
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: CustomColors.customSwatchColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+                GetBuilder<CartController>(
+                  builder: (controller) {
+                    return Text(
+                      utilsServices
+                          .priceToCurrency(controller.cartTotalPrice()),
+                      style: TextStyle(
+                        fontSize: 23,
+                        color: CustomColors.customSwatchColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(
                   height: 50,
-                  child: CustomButton(
-                    label: 'Concluir pedido',
-                    onPressed: () async {
-                      bool? result = await showOrderConfirmation();
-                      if (result ?? false) {
-                        showDialog(
-                          context: context,
-                          builder: (_) {
-                            return PaymentDialog(
-                              order: app_data.orders.first,
-                            );
-                          },
-                        );
-                      } else {
-                        utilsServices.showToast(
-                          message: 'Pedido não confirmado!',
-                          isError: true,
-                        );
-                      }
+                  child: GetBuilder<CartController>(
+                    builder: (controller) {
+                      return CustomButton(
+                        isLoading: controller.isCheckoutLoding,
+                        label: 'Concluir pedido',
+                        onPressed: () async {
+                          bool? result = await showOrderConfirmation();
+                          if (result ?? false) {
+                            _cartController.checkoutCart();
+                          } else {
+                            utilsServices.showToast(
+                                message: 'Pedido não confirmado');
+                          }
+                        },
+                        color: CustomColors.customSwatchColor,
+                      );
                     },
-                    color: CustomColors.customSwatchColor,
                   ),
                 ),
               ],

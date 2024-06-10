@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -27,6 +29,10 @@ class UtilsServices {
 
   String formatDateTime(DateTime datetime) {
     return DateFormat('dd/MM/yyyy HH:mm').format(datetime);
+  }
+
+  Uint8List decodeQrCodeImage(String value) {
+    return base64.decode(value.split(',').last);
   }
 
   void showToast({required String message, bool isError = false}) {

@@ -1,7 +1,7 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:green_grocer/src/models/order_model.dart';
 import 'package:green_grocer/src/services/utils_services.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class PaymentDialog extends StatelessWidget {
   final OrderModel order;
@@ -40,10 +40,10 @@ class PaymentDialog extends StatelessWidget {
                   ),
                 ),
                 //QR Code
-                QrImageView(
-                  data: 'https://vorp.com.br',
-                  version: QrVersions.auto,
-                  size: 200,
+                Image.memory(
+                  utilsServices.decodeQrCodeImage(order.qrCodeImage),
+                  height: 200,
+                  width: 200,
                 ),
                 //Vencimento
                 Text(
@@ -73,7 +73,12 @@ class PaymentDialog extends StatelessWidget {
                       color: Colors.green,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    FlutterClipboard.copy(order.copyAndPast);
+                    utilsServices.showToast(
+                      message: 'Código Pix copiado',
+                    );
+                  },
                   icon: const Icon(
                     Icons.copy,
                     size: 15,
