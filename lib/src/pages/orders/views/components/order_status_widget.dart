@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:green_grocer/src/pages/orders/components/custom_divider_widget.dart';
-import 'package:green_grocer/src/pages/orders/components/status_dot.dart';
+import 'package:green_grocer/src/pages/orders/views/components/custom_divider_widget.dart';
+import 'package:green_grocer/src/pages/orders/views/components/status_dot.dart';
 
 class OrderStatusWidget extends StatelessWidget {
   final String status;

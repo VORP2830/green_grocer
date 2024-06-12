@@ -5,8 +5,6 @@ import 'package:green_grocer/src/pages/cart/controllers/cart_controller.dart';
 import 'package:green_grocer/src/pages/cart/views/components/cart_tile.dart';
 import 'package:green_grocer/src/services/utils_services.dart';
 import 'package:green_grocer/src/widgets/custom_button.dart';
-import 'package:green_grocer/src/config/app_data.dart' as app_data;
-import 'package:green_grocer/src/widgets/payment_dialog.dart';
 
 class CartTab extends StatefulWidget {
   const CartTab({super.key});

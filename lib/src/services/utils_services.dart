@@ -28,7 +28,7 @@ class UtilsServices {
   }
 
   String formatDateTime(DateTime datetime) {
-    return DateFormat('dd/MM/yyyy HH:mm').format(datetime);
+    return DateFormat('dd/MM/yyyy HH:mm').format(datetime.toLocal());
   }
 
   Uint8List decodeQrCodeImage(String value) {

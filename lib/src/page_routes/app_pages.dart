@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:green_grocer/src/pages/auth/views/sign_in_page.dart';
 import 'package:green_grocer/src/pages/auth/views/sign_up_page.dart';
-import 'package:green_grocer/src/pages/base/binding/navigation_biding.dart';
+import 'package:green_grocer/src/pages/base/binding/navigation_binding.dart';
 import 'package:green_grocer/src/pages/base/views/base_page.dart';
 import 'package:green_grocer/src/pages/cart/binding/cart_binding.dart';
 import 'package:green_grocer/src/pages/home/binding/home_binding.dart';
+import 'package:green_grocer/src/pages/orders/binding/orders_binding.dart';
 import 'package:green_grocer/src/pages/product/product_page.dart';
 import 'package:green_grocer/src/pages/splash/splash_page.dart';
 
@@ -31,8 +32,9 @@ abstract class AppPages {
       name: PagesRoutes.baseRoute,
       bindings: [
         HomeBinding(),
-        NavigationBiding(),
+        NavigationBinding(),
         CartBinding(),
+        OrdersBinding(),
       ],
     ),
   ];

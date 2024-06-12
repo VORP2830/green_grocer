@@ -72,7 +72,10 @@ class CartRepository {
     return result.isEmpty;
   }
 
-  Future<OrderModel> checkoutCart({required String token, required double total}) async {
+  Future<OrderModel> checkoutCart({
+    required String token,
+    required double total,
+  }) async {
     final result = await _httpManager.restRequest(
       url: Endpoint.checkout,
       method: HttpMethods.post,
