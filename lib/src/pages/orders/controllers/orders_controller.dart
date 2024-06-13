@@ -18,11 +18,11 @@ class OrdersController extends GetxController {
 
   Future<void> getAllOrders() async {
     try {
-      List<OrderModel> orders = await _ordersRepository.getAllOrders(
+      List<OrderModel> result = await _ordersRepository.getAllOrders(
         userId: _authController.user.id!,
         token: _authController.user.token!,
       );
-      orders.sort((a, b) => b.createdDateTime!.compareTo(a.createdDateTime!));
+      orders = result..sort((a, b) => b.createdDateTime!.compareTo(a.createdDateTime!));
       update();
     } catch (e) {
       _utilsService.showToast(message: e.toString(), isError: true);
