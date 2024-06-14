@@ -75,6 +75,7 @@ class CartController extends GetxController {
             quantity: quantity,
           ),
         );
+        update();
       } catch (e) {
         _utilsServices.showToast(message: e.toString(), isError: true);
       }
